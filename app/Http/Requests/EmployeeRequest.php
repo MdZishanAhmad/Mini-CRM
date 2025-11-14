@@ -20,13 +20,15 @@ class EmployeeRequest extends FormRequest
      * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
      */
     public function rules(): array
-    {
-        return [
-            'first_name' => 'required|string|max:255',
-            'last_name' => 'required|string|max:255',
-            'company_id' => 'required|exists:companies,id',
-            'email' => 'nullable|email|max:255',
-            'phone' => 'nullable|string|max:20',
-        ];
-    }
+{
+    $employeeId = $this->route('employee')?->id ?? $this->employee?->id;
+    
+    return [
+        'first_name' => 'required|string|max:255|min:2|regex:/^[a-zA-Z\s]+$/',
+        'last_name' => 'required|string|max:255|min:2|regex:/^[a-zA-Z\s]+$/',
+        'company_id' => 'required|exists:companies,id',
+        'email' => 'required|email|max:255|unique:employees,email,' . $employeeId,
+        'phone' => 'nullable|digits:10|unique:employees,phone,' . $employeeId,
+    ];
+}
 }
