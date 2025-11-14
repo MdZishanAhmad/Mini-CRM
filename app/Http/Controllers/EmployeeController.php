@@ -6,9 +6,6 @@ use App\Models\Company;
 use App\Models\Employee;
 use Illuminate\Contracts\View\View;
 use App\Http\Requests\EmployeeRequest;
-use App\Http\Requests\StoreEmployeeRequest;
-use App\Http\Requests\UpdateCompanyRequest;
-use App\Http\Requests\UpdateEmployeeRequest;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 
@@ -39,8 +36,7 @@ class EmployeeController extends Controller
     {
         Employee::create($request->validated());
 
-        return redirect()->route('employees.index')
-            ->with('success', 'Employee created successfully.');
+        return redirect()->route('employees.index') ->with('success', 'Employee created successfully.');
     }
 
     /**
@@ -50,10 +46,6 @@ class EmployeeController extends Controller
     {
         return view('employees.show', compact('employee'));
     }
-
-    
-
-    
 
     /**
      * Show the form for editing the specified resource.
@@ -71,8 +63,7 @@ class EmployeeController extends Controller
     {
         $employee->update($request->validated());
 
-        return redirect()->route('employees.index')
-            ->with('success', 'Employee updated successfully.');
+        return redirect()->route('employees.index')->with('success', 'Employee updated successfully.');
     }
 
     /**
@@ -82,7 +73,6 @@ class EmployeeController extends Controller
     {
         $employee->delete();
 
-        return redirect()->route('employees.index')
-            ->with('success', 'Employee deleted successfully.');
+        return redirect()->route('employees.index')->with('success', 'Employee deleted successfully.');
     }
 }
