@@ -24,13 +24,12 @@ class CompanyRequest extends FormRequest
         return [
             'name' => 'required|string|max:255',
             'email' => 'nullable|email|max:255',
-            'logo' => 'required|nullable|unique:companies,logo',
             'website' => 'nullable|url|max:255',
         ];
         if ($this->isMethod('post')) {
-            $rules['logo'] = 'nullable|image|dimensions:min_width=100,min_height=100';
+            $rules['logo'] = 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048|dimensions:min_width=100,min_height=100';
         } else {
-            $rules['logo'] = 'nullable|image|dimensions:min_width=100,min_height=100';
+            $rules['logo'] = 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048|dimensions:min_width=100,min_height=100|unique:companies,logo,' . $companyId;
         }
         return $rules;
     }
