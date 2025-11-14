@@ -7,8 +7,6 @@ use Illuminate\Contracts\View\View;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use App\Http\Requests\CompanyRequest;
-use App\Http\Requests\StoreCompanyRequest;
-use App\Http\Requests\UpdateCompanyRequest;
 use Illuminate\Support\Facades\Storage;
 
 class CompanyController extends Controller
@@ -49,7 +47,7 @@ class CompanyController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Company $company)
+    public function show(Company $company):View
     {
         return view('companies.show', compact('company'));
     }
@@ -82,8 +80,7 @@ class CompanyController extends Controller
 
         $company->update($data);
 
-        return redirect()->route('companies.index')
-            ->with('success', 'Company updated successfully.');
+        return redirect()->route('companies.index')->with('success', 'Company updated successfully.');
     }
 
     /**
@@ -97,8 +94,7 @@ class CompanyController extends Controller
 
         $company->delete();
 
-        return redirect()->route('companies.index')
-            ->with('success', 'Company deleted successfully.');
+        return redirect()->route('companies.index')->with('success', 'Company deleted successfully.');
     }
     
 }
