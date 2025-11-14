@@ -86,6 +86,9 @@
             {{ $companies->links() }}
         </div> --}}
         @if($companies->hasPages())
+        <div class="text-muted">
+                    Showing {{ $companies->firstItem() }} to {{ $companies->lastItem() }} of {{ $companies->total() }} results
+                </div>
         <div class="d-flex justify-content-center mt-4">
             <nav aria-label="Page navigation">
                 <ul class="pagination">
