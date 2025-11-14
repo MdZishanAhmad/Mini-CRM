@@ -12,7 +12,7 @@
 
 <div class="card">
     <div class="card-body">
-        <form action="{{ route('employees.update', $employee) }}" method="POST">
+        <form action="{{ route('employees.update', $employee->id) }}" method="POST">
             @csrf
             @method('PUT')
             
@@ -49,7 +49,7 @@
 
             <div class="mb-3">
                 <label for="company_id" class="form-label">Company *</label>
-                <select class="form-control @error('company_id') is-invalid @enderror" 
+                <select class="form-select @error('company_id') is-invalid @enderror" 
                         id="company_id" 
                         name="company_id" 
                         required>
@@ -91,7 +91,9 @@
             </div>
 
             <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                <button type="submit" class="btn btn-primary">Update Employee</button>
+                <button type="submit" class="btn btn-primary">
+                    <i class="fas fa-save"></i> Update Employee
+                </button>
             </div>
         </form>
     </div>

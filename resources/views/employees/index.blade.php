@@ -69,9 +69,13 @@
             {{ $employees->links() }}
         </div> --}}
         @if($employees->hasPages())
+         <div class="text-muted">
+                    Showing {{ $employees->firstItem() }} to {{ $employees->lastItem() }} of {{ $employees->total() }} results
+                </div>
         <div class="d-flex justify-content-center mt-4">
             <nav aria-label="Page navigation">
                 <ul class="pagination">
+                    
                     {{-- Previous Page Link --}}
                     @if ($employees->onFirstPage())
                         <li class="page-item disabled" aria-disabled="true">
@@ -79,6 +83,7 @@
                                 <i class="fas fa-chevron-left"></i>
                             </span>
                         </li>
+                        
                     @else
                         <li class="page-item">
                             <a class="page-link" href="{{ $employees->previousPageUrl() }}" rel="prev">
