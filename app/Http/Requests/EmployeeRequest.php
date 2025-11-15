@@ -20,15 +20,25 @@ class EmployeeRequest extends FormRequest
      * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
      */
     public function rules(): array
-{
-    $employeeId = $this->route('employee')?->id ?? $this->employee?->id;
-    
-    return [
-        'first_name' => 'required|string|max:255|min:2|regex:/^[a-zA-Z\s]+$/',
-        'last_name' => 'required|string|max:255|min:2|regex:/^[a-zA-Z\s]+$/',
-        'company_id' => 'required|exists:companies,id',
-        'email' => 'required|email|max:255|unique:employees,email,' . $employeeId,
-        'phone' => 'nullable|digits:10|unique:employees,phone,' . $employeeId,
-    ];
-}
+    {
+        $employeeId = $this->route('employee')?->id ?? $this->employee?->id;
+
+        return [
+            'first_name' => 'required|string|max:255|min:2|regex:/^[a-zA-Z\s]+$/',
+            'last_name' => 'required|string|max:255|min:2|regex:/^[a-zA-Z\s]+$/',
+            'company_id' => 'required|exists:companies,id',
+            'email' => 'required|email|max:255|unique:employees,email,' . $employeeId,
+            'phone' => 'nullable|string|max:20|regex:/^[\+]?[(]?[0-9]{1,4}[)]?[-\s\.]?[(]?[0-9]{1,4}[)]?[-\s\.]?[0-9]{1,9}$/|unique:employees,phone,' . $employeeId,
+        ];
+    }
+    public function messages(): array
+    {
+        return [
+            'first_name.regex' => 'The first name may only contain letters and spaces.',
+            'last_name.regex' => 'The last name may only contain letters and spaces.',
+            'phone.regex' => 'The phone number format is invalid.',
+            'phone.max' => 'Phone number cannot exceed 20 characters.',
+
+        ];
+    }
 }
