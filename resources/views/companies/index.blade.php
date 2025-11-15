@@ -30,9 +30,9 @@
                                 @if($company->logo)
                                     <img src="{{ asset('storage/' . $company->logo) }}" 
                                          alt="{{ $company->name }}" 
-                                         width="50" 
+                                         width="70" 
                                          height="50" 
-                                         style="object-fit: cover;" class="rounded">
+                                         style="object-fit: cover;" class="img-thumbnail">
                                 @else
                                     <div class="bg-secondary d-flex align-items-center justify-content-center rounded" 
                                          style="width: 50px; height: 50px;">
