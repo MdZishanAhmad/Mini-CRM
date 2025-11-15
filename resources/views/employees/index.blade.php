@@ -65,9 +65,6 @@
             </table>
         </div>
         
-        {{-- <div class="d-flex justify-content-center mt-4">
-            {{ $employees->links() }}
-        </div> --}}
         @if($employees->hasPages())
          <div class="text-muted">
                     Showing {{ $employees->firstItem() }} to {{ $employees->lastItem() }} of {{ $employees->total() }} results
@@ -76,7 +73,6 @@
             <nav aria-label="Page navigation">
                 <ul class="pagination">
                     
-                    {{-- Previous Page Link --}}
                     @if ($employees->onFirstPage())
                         <li class="page-item disabled" aria-disabled="true">
                             <span class="page-link">
@@ -92,7 +88,6 @@
                         </li>
                     @endif
 
-                    {{-- Pagination Elements --}}
                     @foreach ($employees->getUrlRange(1, $employees->lastPage()) as $page => $url)
                         @if ($page == $employees->currentPage())
                             <li class="page-item active" aria-current="page">
@@ -105,7 +100,6 @@
                         @endif
                     @endforeach
 
-                    {{-- Next Page Link --}}
                     @if ($employees->hasMorePages())
                         <li class="page-item">
                             <a class="page-link" href="{{ $employees->nextPageUrl() }}" rel="next">
